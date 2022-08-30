@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<head th:fragment="head">
+
+  <title>Antiphishing Phishing Club</title>
+
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="shortcut icon"  href="libreria/images/icon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="libreria/css/login.css">
+
+
+</head>
+<body>
+  <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+      <div class="card login-card" >
+        <div class="row no-gutters">
+          <div class="col-md-5">
+            <img src="libreria/images/bg-login.jpg" alt="login" class="login-card-img">
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <div class="brand-wrapper">
+                <a  th:href="@{/}">	<img src="libreria/images/icon.png" alt="logo" class="logo"></a>
+                <label class="login-card-description">Antiphishing Phishing Club</label>
+              </div>
+              <p class="login-card-description">Registro</p>
+             
+              
+              
+              <form th:action="@{/registry/save}" th:object="${account}" method="post"  >
+                  <div class="form-group">
+                    <label for="email" class="">Nombre</label>
+                    <input type="text" th:field="*{nameAccount}"
+									class="form-control" autocomplete="off"
+									th:errorclass="'form-control alert-danger'" required
+									pattern="[A-Za-z]{1,45}" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('nameAccount')}"
+									th:errors="*{nameAccount}"></small>
+                  </div>                  
+                  <div class="form-group mb-4">
+                    <label for="password" class="">Apellidos</label>
+                    <input type="text" th:field="*{lastNameAccount}"
+									autocomplete="off" required pattern="[A-Za-z]{1,45}"
+									class="form-control"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('lastNameAccount')}"
+									th:errors="*{lastNameAccount}"></small>
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="password" class="">Email</label>
+                    <input type="email" th:field="*{correoAccount}" required
+									class="form-control"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('correoAccount')}"
+									th:errors="*{correoAccount}"></small>
+                  </div>
+                   <div class="form-group mb-4">
+                    <label for="password" class="">DNI</label>
+                    <input type="text" th:field="*{dniAccount}" pattern="[0-9]{8,8}"
+									required="required" id="cf-dni" autocomplete="off"
+									class="form-control"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('dniAccount')}"
+									th:errors="*{dniAccount}"></small>
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="password" class="">Contraseña</label>
+                   <input type="password" th:field="*{passwordAccount}"
+									minlength="6" required pattern="{1,20}" class="form-control"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('passwordAccount')}"
+									th:errors="*{passwordAccount}"></small>
+                  </div>
+                   <div class="form-group mb-4">
+                   <div class="col-sm-6" style="display: none">
+								<select id="user" class="form-control" th:field="*{roleAccount}">
+									<option th:each="role : ${roles}" th:text="${role.nameRole}"
+										th:value="${role.idRole}"></option>
+								</select>
+							</div>
+                  </div>                 
+                  <input type="submit" name="login" id="login" class="btn btn-block login-btn mb-4" value="Registrar">
+                                   
+                  
+                  
+                </form>
+                	<script type="text/javascript">
+				var input = document.getElementById('cf-dni');
+				input.addEventListener('input', function() {
+					if (this.value.length > 8)
+						this.value = this.value.slice(0, 8);
+				})
+			</script>
+                
+                <div align="center" class="col-8 mb-2" >
+			 			 <div class="alert alert-success" th:if="${success != null}"
+							th:text="${mensaje}"></div>
+			 	     	  <div class="alert alert-danger" th:if="${error != null}"
+							th:text="${mensaje2}"></div>
+			 		     
+		       </div>
+                <!--  <a href="#!" class="forgot-password-link">Olvidaste tu contraseña?</a>-->
+                <p class="login-card-footer-text">Ya tienes cuenta? <a th:href="@{/login}"class="text-reset">Ingresa aquí</a></p>
+                <nav class="login-card-footer-nav">
+                  <a href="#!">Términos de uso.</a>
+                  <a href="#!">Política de privacidad.</a>
+                </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

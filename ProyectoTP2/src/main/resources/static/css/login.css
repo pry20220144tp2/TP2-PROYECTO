@@ -1,0 +1,16 @@
+.display-1{
+    background-color: rgb(57, 191, 57);
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-style: bold;
+}
+.text{
+    text-align :center;
+    font-size: 30px;
+    padding-bottom: 10px;
+}
+.bottom{
+    text-align: center;
+    padding-top: 15px;
+}

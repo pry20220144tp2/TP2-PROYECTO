@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<head th:fragment="head">
+
+  <title>Antiphishing Phishing Club</title>
+
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="shortcut icon"  href="libreria/images/icon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="libreria/css/login.css">
+
+
+</head>
+<body>
+  <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+      <div class="card login-card">
+        <div class="row no-gutters">
+          <div class="col-md-5">
+            <img src="libreria/images/bg-login.jpg" alt="login" class="login-card-img">
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <div class="brand-wrapper">
+                <a  th:href="@{/}"><img src="libreria/images/icon.png" alt="logo" class="logo"></a>
+                <label class="login-card-description">Antiphishing Phishing Club</label>
+              </div>
+              <p class="login-card-description">Iniciar sesión</p>
+             
+              
+              
+              <form th:action="@{/login}" method="post" >
+                  <div class="form-group">
+                    <label for="email" class="sr-only">Email</label>
+                    <input type="email" name="username" id="username" class="form-control" required placeholder="Correo electronico">
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="password" class="sr-only">Contraseña</label>
+                    <input type="password" name="password" id="password" class="form-control"  required placeholder="***********">
+                  </div>
+                  <input type="submit" name="login" id="login" class="btn btn-block login-btn mb-4" value="Ingresar">
+                </form>
+                
+                
+                <div align="center" class="col-8 mb-2" >
+			 			 <div class="alert alert-success" th:if="${success != null}"
+							th:text="${success}"></div>
+			 	     	  <div class="alert alert-danger" th:if="${error != null}"
+							th:text="${error}"></div>
+			 		     <div class="alert alert-info" th:if="${info != null}"
+							th:text="${info}"></div>
+		       </div>
+                <!--  <a href="#!" class="forgot-password-link">Olvidaste tu contraseña?</a>-->
+                <!--  <p class="login-card-footer-text">Aún no tienes cuenta? <a th:href="@{/registry}"class="text-reset">Registrate aquí</a></p>-->
+                <nav class="login-card-footer-nav">
+                  <a href="#!">Términos de uso.</a>
+                  <a href="#!">Política de privacidad.</a>
+                </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
