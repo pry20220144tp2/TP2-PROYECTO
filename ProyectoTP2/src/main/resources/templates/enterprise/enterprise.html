@@ -192,7 +192,7 @@
 							<label for="name" class="col-sm-2 col-form-label">RUC</label>
 							<div class="col-sm-6">
 								<input type="text" th:field="*{rucEnterprise}"
-									pattern="[0-9]{11}" class="form-control"
+									pattern="[0-9]{1,12}" class="form-control"
 									th:errorclass="'form-control alert-danger'" required /> <small
 									class="form-text text-danger"
 									th:if="${#fields.hasErrors('rucEnterprise')}"
