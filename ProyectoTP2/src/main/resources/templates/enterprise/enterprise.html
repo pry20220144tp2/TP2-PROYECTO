@@ -9,6 +9,10 @@
 <meta name="author" content="">
 <title>Antiphishing Phishing Club</title>
 <link rel="shortcut icon" href="/libreria/images/icon.ico" />
+
+<!-- HOLA -->
+<!-- hola bola -->
+
 <!-- Custom fonts for this template-->
 <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
 	type="text/css">
@@ -31,7 +35,7 @@
 			<!-- Sidebar - Brand -->
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="#">
+				th:href="@{/enterprises/list}">
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-book"></i>
 				</div>
@@ -148,133 +152,84 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">Usuarios</h1>
+					<h1 class="h3 mb-4 text-gray-800">Registro de empresas</h1>
 
 					<hr class="sidebar-divider">
-					<div th:object="${account}" th:remove="tag">
+					<div th:object="${enterprise}" th:remove="tag">
 						<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
 							role="alert">
 							<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
 						</ul>
 					</div>
 
-
-
-
-					<form th:action="@{/users/save}" th:object="${account}"
-						method="post">
-
+					<form th:action="@{/enterprises/save}" th:object="${enterprise}"
+						method="post" enctype="multipart/form-data">
 						<div class="form-group row">
-							<label for="name" class="col-sm-2 col-form-label">Nombre</label>
+							<!--  <label for="name" class="col-sm-2 col-form-label">Código</label>-->
 							<div class="col-sm-6">
-								<input type="text" th:field="*{nameAccount}"
-									class="form-control" autocomplete="off"
-									th:errorclass="'form-control alert-danger'" required
-									pattern="[A-Za-z]{1,45}" /> <small
+								<input type="hidden" th:field="*{idEnterprise}" autocomplete="off"
+									class="form-control" readonly="readonly"
+									th:errorclass="'form-control alert-danger'" /> <small
 									class="form-text text-danger"
-									th:if="${#fields.hasErrors('nameAccount')}"
-									th:errors="*{nameAccount}"></small>
+									th:if="${#fields.hasErrors('idEnterprise')}"
+									th:errors="*{idEnterprise}"></small>
 							</div>
-						</div>
 
+						</div>
 						<div class="form-group row">
-							<label for="name" class="col-sm-2 col-form-label">Apellidos</label>
+							<label for="name" class="col-sm-2 col-form-label">Nombre de Empresa</label>
 							<div class="col-sm-6">
-								<input type="text" th:field="*{lastNameAccount}"
-									autocomplete="off" required pattern="[A-Za-z]{1,45}"
+								<input type="text" th:field="*{nameEnterprise}" autocomplete="off"
 									class="form-control"
-									th:errorclass="'form-control alert-danger'" /> <small
+									th:errorclass="'form-control alert-danger'" required  /> <small
 									class="form-text text-danger"
-									th:if="${#fields.hasErrors('lastNameAccount')}"
-									th:errors="*{lastNameAccount}"></small>
+									th:if="${#fields.hasErrors('nameEnterprise')}"
+									th:errors="*{nameEnterprise}"></small>
 							</div>
+
 						</div>
 						<div class="form-group row">
-							<label for="name" class="col-sm-2 col-form-label">Email</label>
+							<label for="name" class="col-sm-2 col-form-label">RUC</label>
 							<div class="col-sm-6">
-								<input type="email" th:field="*{correoAccount}" required
-									class="form-control"
-									th:errorclass="'form-control alert-danger'" /> <small
+								<input type="text" th:field="*{rucEnterprise}"
+									pattern="[0-9]{11}" class="form-control"
+									th:errorclass="'form-control alert-danger'" required /> <small
 									class="form-text text-danger"
-									th:if="${#fields.hasErrors('correoAccount')}"
-									th:errors="*{correoAccount}"></small>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="name" class="col-sm-2 col-form-label">DNI</label>
-							<div class="col-sm-6">
-								<input type="text" th:field="*{dniAccount}" pattern="[0-9]{8,8}"
-									required="required" id="cf-dni" autocomplete="off"
-									class="form-control"
-									th:errorclass="'form-control alert-danger'" /> <small
-									class="form-text text-danger"
-									th:if="${#fields.hasErrors('dniAccount')}"
-									th:errors="*{dniAccount}"></small>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="name" class="col-sm-2 col-form-label">Contraseña</label>
-							<div class="col-sm-6">
-								<input type="password" th:field="*{passwordAccount}"
-									minlength="6" required pattern="{1,20}" class="form-control"
-									th:errorclass="'form-control alert-danger'" /> <small
-									class="form-text text-danger"
-									th:if="${#fields.hasErrors('passwordAccount')}"
-									th:errors="*{passwordAccount}"></small>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="name" class="col-sm-2 col-form-label">Rol</label>
-
-							<div class="col-sm-6">
-								<select id="user" class="form-control" th:field="*{roleAccount}">
-									<option th:each="role : ${roles}" th:text="${role.nameRole}"
-										th:value="${role.idRole}"></option>
-								</select>
-							</div>
-
-						</div>
-
-						<div class="form-group row">
-							<div class="col-sm-6">
-								<input type="submit" value="Guardar" class="btn btn-secondary"></input>
-								<a href="/users/list/" class="btn btn-danger">Cancelar</a>
+									th:if="${#fields.hasErrors('rucEnterprise')}"
+									th:errors="*{rucEnterprise}"></small>
 							</div>
 						</div>
 
-					</form>
-					<p th:text="${mensaje}" class="form-text text-success"></p>
-					<p th:text="${mensaje2}" class="form-text text-danger"></p>
-
-
-
-				</div>
-				<!-- /.container-fluid -->
-
-			</div>
-			<script type="text/javascript">
-				var input = document.getElementById('cf-dni');
-				input.addEventListener('input', function() {
-					if (this.value.length > 8)
-						this.value = this.value.slice(0, 8);
-				})
-			</script>
-			<!-- End of Main Content -->
-
-			<!-- Footer -->
-			<footer class="sticky-footer bg-white">
-				<div class="container my-auto">
-					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; 2022 Antiphishing Phishing Club</span>
+				<div class="form-group row">
+					<div class="col-sm-6">
+						<input type="submit" value="Guardar" class="btn btn-secondary"></input>
+						<a href="/enterprises/list" class="btn btn-danger">Cancelar</a>
 					</div>
 				</div>
-			</footer>
-			<!-- End of Footer -->
 
+				</form>
+				<p th:text="${mensaje2}" class="form-text text-danger"></p>
+
+			</div>
+			<!-- /.container-fluid -->
+       
 		</div>
-		<!-- End of Content Wrapper -->
+		<!-- End of Main Content -->
 
+		<!-- Footer -->
+		<footer class="sticky-footer bg-white">
+			<div class="container my-auto">
+				<div class="copyright text-center my-auto">
+					<span>Copyright &copy; 2022 Antiphishing Phishing Club</span>
+				</div>
+			</div>
+		</footer>
+		<!-- End of Footer -->
+		</div>
+	
+	<!-- End of Content Wrapper -->
 	</div>
+	
 	<!-- End of Page Wrapper -->
 
 	<!-- Scroll to Top Button-->
@@ -303,7 +258,7 @@
 							onclick="document.getElementById('logoutForm').submit();"
 							type="submit">Cerrar</button>
 						<button class="btn btn-dark" type="button" data-dismiss="modal"
-							th:href="@{/users/new}">Cancel</button>
+							th:href="@{/enterprises/new}">Cancel</button>
 					</form>
 				</div>
 			</div>

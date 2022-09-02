@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+
 <title>Antiphishing Phishing Club</title>
 <link rel="shortcut icon" href="/libreria/images/icon.ico" />
+
 <!-- Custom fonts for this template-->
 <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
 	type="text/css">
@@ -18,7 +22,9 @@
 
 <!-- Custom styles for this template-->
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
 </head>
+
 <body id="page-top">
 
 	<!-- Page Wrapper -->
@@ -26,25 +32,28 @@
 
 		<!-- Sidebar -->
 		<ul
-			class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion"
+			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
 			id="accordionSidebar">
+
 			<!-- Sidebar - Brand -->
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="#">
+				th:href="@{/categories/list}">
 				<div class="sidebar-brand-icon rotate-n-15">
-					<i class="fas fa-book"></i>
+					<i class="fas fa-leaf"></i>
 				</div>
-				<div class="sidebar-brand-text mx-2">Antiphishing Phishing Club</div>
+				<div class="sidebar-brand-text mx-2">Taller de Proyecto 2</div>
 			</a>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
 
+
+
 			<!-- Nav Item - Pages Collapse Menu -->
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				data-target="#collapseTwo" aria-expanded="false"
+				data-target="#collapseTwo" aria-expanded=true
 				aria-controls="collapseTwo"> <i class="fas fa-fw fa-cog"></i> <span>Men&uacute;</span>
 			</a>
 				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
@@ -77,6 +86,11 @@
 						<a class="collapse-item " th:href="@{/loans/reports}">Reportes</a>
 					</div>-->
 				</div></li>
+
+
+
+			<!-- Divider -->
+			<hr class="sidebar-divider">
 
 			<!-- Sidebar Toggler (Sidebar) -->
 
@@ -123,7 +137,6 @@
 								class="mr-2 d-none d-lg-inline text-gray-600 small"><img
 									th:src="@{/img/logout.png}" width="30" height="30" alt="logo"
 									align="middle"></img></span>
-
 						</a> <!-- Dropdown - User Information -->
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -132,8 +145,8 @@
 									class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Perfil
 								</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-toggle="modal"
-									data-target="#logoutModal"> <i
+								<a class="dropdown-item" href="categories/index"
+									data-toggle="modal" data-target="#logoutModal"> <i
 									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									Cerrar sesión
 								</a>
@@ -143,138 +156,60 @@
 
 				</nav>
 				<!-- End of Topbar -->
+				<div class="container">
+					<div class="card">
+						<div class="card-header text-white bg-dark mb-3">Detalle de
+							Autor</div>
+						<div class="card-body">
 
-				<!-- Begin Page Content -->
-				<div class="container-fluid">
+							<div class="table-responsive">
+								<table class="table table-white">
 
-					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">Usuarios</h1>
+									<tbody>
+										<tr>
+											<td>Codigo</td>
+											<td th:text="${enterprise.idEnterprise}"></td>
+										</tr>
+										<tr>
+											<td>Nombre</td>
+											<td th:text="${enterprise.nameEnterprise}"></td>
+										</tr>
+										<tr>
+											<td>RUC</td>
+											<td th:text="${enterprise.rucEnterprise}"></td>
+										</tr>
+									</tbody>
 
-					<hr class="sidebar-divider">
-					<div th:object="${account}" th:remove="tag">
-						<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
-							role="alert">
-							<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
-						</ul>
+								</table>
+
+								<a th:href="@{/enterprises/list}" type="button"
+									class="btn btn-danger k"> <span
+									class="glyphicon glyphicon-circle-arrow-left"></span> Volver
+								</a>
+							</div>
+						</div>
 					</div>
-
-
-
-
-					<form th:action="@{/users/save}" th:object="${account}"
-						method="post">
-
-						<div class="form-group row">
-							<label for="name" class="col-sm-2 col-form-label">Nombre</label>
-							<div class="col-sm-6">
-								<input type="text" th:field="*{nameAccount}"
-									class="form-control" autocomplete="off"
-									th:errorclass="'form-control alert-danger'" required
-									pattern="[A-Za-z]{1,45}" /> <small
-									class="form-text text-danger"
-									th:if="${#fields.hasErrors('nameAccount')}"
-									th:errors="*{nameAccount}"></small>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="name" class="col-sm-2 col-form-label">Apellidos</label>
-							<div class="col-sm-6">
-								<input type="text" th:field="*{lastNameAccount}"
-									autocomplete="off" required pattern="[A-Za-z]{1,45}"
-									class="form-control"
-									th:errorclass="'form-control alert-danger'" /> <small
-									class="form-text text-danger"
-									th:if="${#fields.hasErrors('lastNameAccount')}"
-									th:errors="*{lastNameAccount}"></small>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="name" class="col-sm-2 col-form-label">Email</label>
-							<div class="col-sm-6">
-								<input type="email" th:field="*{correoAccount}" required
-									class="form-control"
-									th:errorclass="'form-control alert-danger'" /> <small
-									class="form-text text-danger"
-									th:if="${#fields.hasErrors('correoAccount')}"
-									th:errors="*{correoAccount}"></small>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="name" class="col-sm-2 col-form-label">DNI</label>
-							<div class="col-sm-6">
-								<input type="text" th:field="*{dniAccount}" pattern="[0-9]{8,8}"
-									required="required" id="cf-dni" autocomplete="off"
-									class="form-control"
-									th:errorclass="'form-control alert-danger'" /> <small
-									class="form-text text-danger"
-									th:if="${#fields.hasErrors('dniAccount')}"
-									th:errors="*{dniAccount}"></small>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="name" class="col-sm-2 col-form-label">Contraseña</label>
-							<div class="col-sm-6">
-								<input type="password" th:field="*{passwordAccount}"
-									minlength="6" required pattern="{1,20}" class="form-control"
-									th:errorclass="'form-control alert-danger'" /> <small
-									class="form-text text-danger"
-									th:if="${#fields.hasErrors('passwordAccount')}"
-									th:errors="*{passwordAccount}"></small>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="name" class="col-sm-2 col-form-label">Rol</label>
-
-							<div class="col-sm-6">
-								<select id="user" class="form-control" th:field="*{roleAccount}">
-									<option th:each="role : ${roles}" th:text="${role.nameRole}"
-										th:value="${role.idRole}"></option>
-								</select>
-							</div>
-
-						</div>
-
-						<div class="form-group row">
-							<div class="col-sm-6">
-								<input type="submit" value="Guardar" class="btn btn-secondary"></input>
-								<a href="/users/list/" class="btn btn-danger">Cancelar</a>
-							</div>
-						</div>
-
-					</form>
-					<p th:text="${mensaje}" class="form-text text-success"></p>
-					<p th:text="${mensaje2}" class="form-text text-danger"></p>
-
-
-
 				</div>
-				<!-- /.container-fluid -->
-
 			</div>
-			<script type="text/javascript">
-				var input = document.getElementById('cf-dni');
-				input.addEventListener('input', function() {
-					if (this.value.length > 8)
-						this.value = this.value.slice(0, 8);
-				})
-			</script>
-			<!-- End of Main Content -->
+			<!-- /.container-fluid -->
 
-			<!-- Footer -->
-			<footer class="sticky-footer bg-white">
-				<div class="container my-auto">
-					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; 2022 Antiphishing Phishing Club</span>
-					</div>
+		
+		<!-- End of Main Content -->
+
+		<!-- Footer -->
+		<footer class="sticky-footer bg-white">
+			<div class="container my-auto">
+				<div class="copyright text-center my-auto">
+					<span>Copyright &copy; 2022 Antiphishing Phishing Club</span>
 				</div>
-			</footer>
-			<!-- End of Footer -->
-
-		</div>
-		<!-- End of Content Wrapper -->
-
+			</div>
+		</footer>
+		<!-- End of Footer -->
 	</div>
+	</div>
+	<!-- End of Content Wrapper -->
+
+	
 	<!-- End of Page Wrapper -->
 
 	<!-- Scroll to Top Button-->
@@ -302,8 +237,8 @@
 						<button class="btn btn-danger"
 							onclick="document.getElementById('logoutForm').submit();"
 							type="submit">Cerrar</button>
-						<button class="btn btn-dark" type="button" data-dismiss="modal"
-							th:href="@{/users/new}">Cancel</button>
+					<button class="btn btn-dark" type="button" data-dismiss="modal"
+							th:href="@{/books/list}">Cancel</button>
 					</form>
 				</div>
 			</div>
@@ -313,6 +248,7 @@
 	<!-- Bootstrap core JavaScript-->
 	<script src="/vendor/jquery/jquery.min.js"></script>
 	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 	<!-- Core plugin JavaScript-->
 	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -320,4 +256,5 @@
 	<script src="/js/sb-admin-2.min.js"></script>
 
 </body>
+
 </html>
