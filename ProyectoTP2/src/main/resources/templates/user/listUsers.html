@@ -192,6 +192,7 @@ th, td {
 								<th scope="col">NOMBRES</th>
 								<th scope="col">APELLIDOS</th>
 								<!--  <th scope="col">CONTRASEÑA</th>-->
+								<th scope="col">EMPRESA</th>
 								<th scope="col">ROL</th>
 							</tr>
 						</thead>
@@ -202,6 +203,7 @@ th, td {
 								<td th:text="${cate.nameAccount}"></td>
 								<td th:text="${cate.lastNameAccount}"></td>
 								<!-- <td th:text="${cate.passwordAccount}"></td>-->
+								<td th:text="${cate.enterprise.nameEnterprise}"></td>
 								<td th:text="${cate.roleAccount.nameRole}"></td>
 							</tr>
 						</tbody>

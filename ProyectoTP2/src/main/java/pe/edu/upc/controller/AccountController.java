@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import pe.edu.upc.entity.Account;
 import pe.edu.upc.serviceinterface.IAccountService;
+import pe.edu.upc.serviceinterface.IEnterpriseService;
 import pe.edu.upc.serviceinterface.IRoleService;
 
 @Controller
@@ -25,6 +26,8 @@ public class AccountController {
 
 	@Autowired
 	private IAccountService cS;
+	@Autowired
+	private IEnterpriseService eS;
 	@Autowired
 	private IRoleService rS;
 
@@ -45,14 +48,13 @@ public class AccountController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-
 		return "user/listUsers";
 	}
 
 	@GetMapping("/new")
 	public String newAccount(Model model) {
 		model.addAttribute("account", new Account());
-
+		model.addAttribute("enterprises", eS.list());
 		model.addAttribute("roles", rS.list());
 		return "user/user";
 	}
@@ -60,6 +62,7 @@ public class AccountController {
 	@PostMapping("/save")
 	public String saveAccount(@Validated Account account, BindingResult result, Model model) throws Exception {
 		if (result.hasErrors()) {
+			model.addAttribute("enterprises", eS.list());
 			model.addAttribute("roles", rS.list());
 			return "user/user";
 		} else {
@@ -67,12 +70,13 @@ public class AccountController {
 			account.setPasswordAccount(password);
 			int rpta = cS.insert(account);
 			if (rpta > 0) {
+				model.addAttribute("enterprises", eS.list());
 				model.addAttribute("roles", rS.list());
 				model.addAttribute("mensaje2", "El DNI y/o el correo ya está(n) en uso");
 				return "user/user";
 			} else {
-
 				cS.insert(account);
+				model.addAttribute("enterprises", eS.list());
 				model.addAttribute("roles", rS.list());
 				model.addAttribute("listAccounts", cS.list());
 				model.addAttribute("mensaje", "El usuario se registró correctamente");
