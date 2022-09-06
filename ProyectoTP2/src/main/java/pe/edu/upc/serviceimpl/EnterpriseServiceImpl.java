@@ -28,7 +28,7 @@ public class EnterpriseServiceImpl implements Serializable, IEnterpriseService {
 
 	@Override
 	public int insert(Enterprise enterprise) {
-		int rpta = cR.searchEnterprise(enterprise.getNameEnterprise(), enterprise.getRucEnterprise());
+		int rpta = cR.searchEnterprise(enterprise.getNameEnterprise());//aqui quizas vaya el getRucEnterprise
 		if (rpta == 0) {
 			cR.save(enterprise);
 		}

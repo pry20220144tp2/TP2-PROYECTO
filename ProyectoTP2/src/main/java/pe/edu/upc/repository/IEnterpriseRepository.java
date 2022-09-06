@@ -11,8 +11,9 @@ import pe.edu.upc.entity.Enterprise;
 
 @Repository
 public interface IEnterpriseRepository extends JpaRepository<Enterprise, Integer> {
-	@Query("select count(a.nameEnterprise) from Enterprise a where upper(a.nameEnterprise)=upper(:nameEnterprise) or a.rucEnterprise=:rucEnterprise")
-	public int searchEnterprise(@Param("nameEnterprise") String nombre, @Param("rucEnterprise") int rucEnterprise);
+	@Query("select count(a.nameEnterprise) from Enterprise a where upper(a.nameEnterprise)=upper(:nameEnterprise)")
+	public int searchEnterprise(@Param("nameEnterprise") String nombre);
+	
 	
 	@Query("from Enterprise a where lower(a.nameEnterprise) like lower(concat('%', :parametro,'%'))")
 	List<Enterprise> findBynameEnterprise(@Param("parametro")String nameEnterprise);
