@@ -14,7 +14,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
 @Entity
-@Table(name = "Enterprise")
+@Table(name = "Empresa")
 public class Enterprise implements Serializable {
 
 	private static final long serialVersionUID = 1L;

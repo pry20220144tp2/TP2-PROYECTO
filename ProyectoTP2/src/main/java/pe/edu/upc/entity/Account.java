@@ -1,6 +1,7 @@
 package pe.edu.upc.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,9 +38,8 @@ public class Account implements Serializable {
 	@Column (name="passwordAccount", nullable=false, length = 200)
 	private String passwordAccount;
 	
-	@ManyToOne
-	@JoinColumn(name = "idEnterprise", nullable = false)
-	private Enterprise enterpriseAccount;
+	
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "idRole", nullable = false)
@@ -51,7 +51,7 @@ public class Account implements Serializable {
 	}
 
 	public Account(int idAccount, String nameAccount, String lastNameAccount, String correoAccount, int dniAccount,
-			String passwordAccount, Enterprise enterprise, Role roleAccount) {
+			String passwordAccount, Role roleAccount) {
 		super();
 		this.idAccount = idAccount;
 		this.nameAccount = nameAccount;
@@ -59,7 +59,6 @@ public class Account implements Serializable {
 		this.correoAccount = correoAccount;
 		this.dniAccount = dniAccount;
 		this.passwordAccount = passwordAccount;
-		this.enterpriseAccount = enterprise;
 		this.roleAccount = roleAccount;
 	}
 
@@ -109,14 +108,6 @@ public class Account implements Serializable {
 
 	public void setPasswordAccount(String passwordAccount) {
 		this.passwordAccount = passwordAccount;
-	}
-	
-	public Enterprise getEnterprise() {
-		return enterpriseAccount;
-	}
-
-	public void setEnterprise(Enterprise enterprise) {
-		this.enterpriseAccount = enterprise;
 	}
 
 	public Role getRoleAccount() {
