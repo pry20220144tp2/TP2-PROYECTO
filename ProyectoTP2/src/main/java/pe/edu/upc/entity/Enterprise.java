@@ -9,7 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 
 @Entity
 @Table(name = "Empresa")
@@ -21,11 +23,13 @@ public class Enterprise implements Serializable {
 	private int idEnterprise;
 
 	// @NotEmpty(message = "El nombre es obligatorio")
-    @Pattern(regexp = "[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s[a-zA-ZÀ-ÿ\\u00f1\\u00d1])*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$", message = "El nombre solo puede tener letras")
+    //@Pattern(regexp = "[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s[a-zA-ZÀ-ÿ\\u00f1\\u00d1])*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$", message = "El nombre solo puede tener letras")
 	
 	@Column(name = "nameEnterprise", nullable = false, length = 45)
 	private String nameEnterprise;
 
+    @Positive(message = "Solo numeros positivos.")
+	@NotNull(message="La cantidad es obligatoria")
     @Column(name = "rucEnterprise", nullable = false, length = 11)
 	private int rucEnterprise;
 
